@@ -16,13 +16,13 @@
 <input type="hidden" name="project_id" value="{{$project->id}}">
 
  <label for="feature_name">Feature:</label> <br>
- <textarea name="feature_name" id="" cols="45" rows="2">{{old('feature_name')}}</textarea> <br>
+ <textarea name="feature_name" id="" cols="45" rows="2">{{$feature->feature_name}}</textarea> <br>
 
  <label for="feature_description">Description</label> <br>
- <textarea name="feature_description" id="" cols="90" rows="10">{{old('feature_description')}}</textarea> <br>
+ <textarea name="feature_description" id="" cols="90" rows="10">{{$feature->feature_name}}</textarea> <br>
 
- <label for="due_date">Due Date</label><br>
- <input type="datetime-local" name="due_date" id="" value="{{old('due_date')}}"> <br>
+ <label for="due_date">Original Due Date {{Carbon\Carbon::parse($feature->due_date)->format('d/m/Y')}}</label><br>
+ <input type="datetime-local" name="due_date" id="" value="{{$feature->due_date}}"> <br>
 
  <input type="submit" value="Save Feature" class="btn btn-primary mt-3">
 

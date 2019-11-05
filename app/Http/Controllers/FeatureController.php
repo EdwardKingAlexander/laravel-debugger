@@ -62,9 +62,11 @@ class FeatureController extends Controller
      * @param  \App\Feature  $feature
      * @return \Illuminate\Http\Response
      */
-    public function edit(Feature $feature)
+    public function edit(Project $project, Feature $feature)
     {
-        return view('features.edit');
+        return view('features.edit')
+        ->with('project', $project)
+        ->with('feature', $feature);
     }
 
     /**
@@ -76,7 +78,9 @@ class FeatureController extends Controller
      */
     public function update(Request $request, Feature $feature)
     {
-        //
+        Feature::update($this->validateProject());
+        
+        return redirect('/projects/'. $request->project_id);
     }
 
     /**
