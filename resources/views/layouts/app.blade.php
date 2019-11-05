@@ -60,6 +60,7 @@
                                     
                                 <a class="dropdown-item" href="{{url('/projects/create')}}">Create New Project</a>
                                 <a class="dropdown-item" href="{{url('/projects')}}">View All Projects</a>
+                                <a class="dropdown-item" href="{{url('/bugs')}}">View All Bugs</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

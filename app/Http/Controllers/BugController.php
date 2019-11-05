@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Feature;
-use App\Bug;
 use App\Project;
+use App\Bug;
 use Illuminate\Http\Request;
 
-class ProjectController extends Controller
+class BugController extends Controller
 {
 
     /**
@@ -20,7 +19,6 @@ class ProjectController extends Controller
         $this->middleware('auth');
     }
 
-
     /**
      * Display a listing of the resource.
      *
@@ -28,10 +26,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-      
-        return view('projects.index')
-        ->with('projects', Project::all())
-        ->with('bugs' , Bug::all());
+        return view('bugs.index')->with('bugs', Bug::all());
     }
 
     /**
@@ -39,9 +34,12 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Project $project)
     {
-        return view('projects.create');
+
+        
+        return view('bugs.create')
+        ->with('project', Project::findOrFail($project->id));
     }
 
     /**
@@ -52,71 +50,63 @@ class ProjectController extends Controller
      */
     public function store(Project $project)
     {
-       
+        Bug::create(request()->validate(
+            [
+             'project_id' => 'required|integer',
+             'bug' => 'required|min:6|string',
+             'solution' => 'string|nullable',
+             'notes' => 'string|nullable',
+            ]
+            ));
 
-        
-        Project::create($this->validateProject());
+           return redirect('/projects/' . $project->id);
 
-        return redirect('/projects/'. $project->id);
+
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Bug  $bug
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show(Bug $bug)
     {
-        return view('projects.show')
-        ->with('project', $project)
-        ->with('bugs', Project::find($project->id)->bugs)
-        ->with('features', Project::find($project->id)->features);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Bug  $bug
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit(Bug $bug)
     {
-        return view('projects.edit')->with('project', $project);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Bug  $bug
      * @return \Illuminate\Http\Response
      */
-    public function update(Project $project)
+    public function update(Request $request, Bug $bug)
     {
-
-        $project->update($this->validateProject());
-
-            return redirect('projects/' . $project->id);
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Bug  $bug
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Bug $bug)
     {
         //
     }
-    
-
-    protected function validateProject()
-    {
-        return request()->validate([
-            'project_name'=> 'required|min:6',
-        ]);
-    }
-
 }
