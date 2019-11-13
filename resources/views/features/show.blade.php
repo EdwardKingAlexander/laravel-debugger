@@ -22,8 +22,15 @@
     @endif
     <div class="d-flex justify-content-center">
     <ul class="list-inline">
-  <li class="list-inline-item btn btn-outline-primary"><a href="{{route('features.edit', ['project'=> $project->id,'feature' => $feature->id])}}">Edit Feature</a></li>
-  <li class="list-inline-item btn btn-outline-danger"><a href="">Delete Feature</a></li>
+  <li class="list-inline-item btn btn-outline-primary"><a href="{{route('features.edit', ['project'=> $project->id,'feature' => $feature->id])}}">Edit Feature</a></li> 
+  <form action="{{route('features.destroy', [$project->id, $feature->id])}}" method="POST">
+      @csrf 
+      @method('DELETE')
+      
+  <input class="mt-2 list-inline-item btn btn-outline-danger" type="submit" value="Delete Feature">
+
+  </form>
+  
 </ul>
     </div>
    

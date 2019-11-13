@@ -8,6 +8,17 @@ use Illuminate\Http\Request;
 
 class FeatureController extends Controller
 {
+
+        /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -76,11 +87,17 @@ class FeatureController extends Controller
      * @param  \App\Feature  $feature
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Feature $feature)
+    public function update(Request $request)
     {
-        Feature::update($this->validateProject());
+        $feature = Feature::findOrFail($request->id);
+        if($this->validateProject())
+        {
+           $input = $request->all();
+           $feature->fill($input)->save();
+
+            return redirect('/projects/'. $request->project_id);   
+        }
         
-        return redirect('/projects/'. $request->project_id);
     }
 
     /**
@@ -89,9 +106,13 @@ class FeatureController extends Controller
      * @param  \App\Feature  $feature
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Feature $feature)
+    public function destroy($project, $feature)
     {
-        //
+        $feature = Feature::find($feature);
+        $feature->delete();
+
+
+        return redirect('/projects/' . $feature->project_id);
     }
 
     

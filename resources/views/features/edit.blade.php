@@ -10,9 +10,11 @@
     <div class="card m-3 p-3 shadow text-center col-10">
    
    
- <form action="{{route('features.store', $project->id)}}" method="post">
+ <form action="{{route('features.update', ['project' => $project->id, 'feature'=>$feature->id])}}" method="post">
 @csrf 
+@method('PUT')
 
+<input type="hidden" name="id" value="{{$feature->id}}">
 <input type="hidden" name="project_id" value="{{$project->id}}">
 
  <label for="feature_name">Feature:</label> <br>
@@ -21,8 +23,8 @@
  <label for="feature_description">Description</label> <br>
  <textarea name="feature_description" id="" cols="90" rows="10">{{$feature->feature_name}}</textarea> <br>
 
- <label for="due_date">Original Due Date {{Carbon\Carbon::parse($feature->due_date)->format('d/m/Y')}}</label><br>
- <input type="datetime-local" name="due_date" id="" value="{{$feature->due_date}}"> <br>
+ <label for="due_date"></label><br>
+ <input type="datetime-local" name="due_date" id="" value=""> <br>
 
  <input type="submit" value="Save Feature" class="btn btn-primary mt-3">
 

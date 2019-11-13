@@ -105,8 +105,9 @@ class BugController extends Controller
      * @param  \App\Bug  $bug
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Bug $bug)
+    public function destroy($project, $bug)
     {
-        //
+        $bug = Bug::find($bug);
+        $bug->delete();
     }
 }
