@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\ApiSearchController;
+
 Auth::routes();
 
 Route::get('/', 'ProjectController@index');

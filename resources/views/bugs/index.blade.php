@@ -42,7 +42,7 @@
 <td>{{$bug->notes}}</td>
 @if($bug->completed)<td class="text-success">Completed</td>@elseif(!$bug->completed)<td class="text-danger">NOT COMPLETED</td>
 <td><label for="">Mark As Complete</label>
-<input type="checkbox" name="" id=""></td>
+<input type="checkbox" name="" value="{{$bug->id}}" id=""></td>
 @endif
 
 </tr>

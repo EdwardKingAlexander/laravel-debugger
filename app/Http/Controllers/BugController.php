@@ -84,7 +84,7 @@ class BugController extends Controller
      */
     public function edit(Bug $bug)
     {
-        //
+        
     }
 
     /**
