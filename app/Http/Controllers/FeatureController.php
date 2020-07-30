@@ -90,14 +90,8 @@ class FeatureController extends Controller
     public function update(Request $request)
     {
         $feature = Feature::findOrFail($request->id);
-        if($this->validateProject())
-        {
-           $input = $request->all();
-           $feature->fill($input)->save();
-
-            return redirect('/projects/'. $request->project_id);   
-        }
-        
+        $feature->completed = $request->completed;
+        $feature->save();       
     }
 
     /**

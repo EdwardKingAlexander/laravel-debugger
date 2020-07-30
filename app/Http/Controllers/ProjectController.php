@@ -66,12 +66,14 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show(Project $project, Request $request)
     {
+    
         return view('projects.show')
         ->with('project', $project)
         ->with('bugs', Project::find($project->id)->bugs)
-        ->with('features', Project::find($project->id)->features);
+        ->with('features', Project::find($project->id)->features)
+        ->with('url', url()->current());
     }
 
     /**

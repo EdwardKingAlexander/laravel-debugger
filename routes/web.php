@@ -19,3 +19,8 @@ Route::get('/', 'ProjectController@index');
 Route::resource('projects', 'ProjectController');
 Route::resource('projects/{project}/bugs','BugController');
 Route::resource('projects/{project}/features', 'FeatureController');
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

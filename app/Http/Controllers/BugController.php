@@ -71,9 +71,9 @@ class BugController extends Controller
      * @param  \App\Bug  $bug
      * @return \Illuminate\Http\Response
      */
-    public function show(Bug $bug)
+    public function show(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
@@ -94,9 +94,11 @@ class BugController extends Controller
      * @param  \App\Bug  $bug
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bug $bug)
+    public function update(Request $request)
     {
-        //
+        $bug = Bug::find($request->id);
+        $bug->completed = $request->completed;
+        $bug->save();
     }
 
     /**

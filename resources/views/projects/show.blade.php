@@ -2,8 +2,6 @@
 
 @section('content')
 <div class="container">
-
-
     <div class="row justify-content-center">
 
 
@@ -28,26 +26,46 @@
     @foreach($bugs as $bug)
     <tr>
       <!--Bug ID-->
-      <th scope="row">{{$bug->id}}</th>
+      <th scope="row" id="bug-id">{{$bug->id}}</th>
 
       <!--Bug Description-->
-      <td><a href=""></a>{{$bug->bug}}</td>
+      <td id="bug-bug"><a href=""></a>{{$bug->bug}}</td>
 
       <!--Bug Created At-->
-      <td>{{Carbon\Carbon::parse($bug->created_at)->format('m/d/Y')}}</td>
+      <td id="bug-date">{{Carbon\Carbon::parse($bug->created_at)->format('m/d/Y')}}</td>
 
       <!--Bug Solution-->
       @if($bug->solution)
-      <td>{{$bug->solution}}</td>
+      <td id="bug-solution">{{$bug->solution}}</td>
       
       @elseif(!$bug->solution) 
       <td class="text-danger">No current known solution</td>@endif
 
       <!--Bug Notes-->
       <td>{{$bug->notes}}</td>
-      @if($bug->completed)<td class="text-success">Completed</td>@elseif(!$bug->completed)<td class="text-danger">NOT COMPLETED</td>
-      <td><label for="">Mark As Complete</label>
-        <input type="checkbox" name="" id=""></td>
+
+      @if($bug->completed)
+    <td class="bug-complete text-success">
+      Completed
+    </td>
+
+      @elseif(!$bug->completed)
+      <td class="text-danger">
+        NOT COMPLETED
+      </td>
+
+
+      <td>
+      <form method="POST" action="/projects/1/bugs/{{$bug->id}}">
+          @csrf
+          {{method_field('PUT')}}
+          <label class="complete" for="">Mark As Complete</label>
+         
+      <input type="checkbox" class="toggle-completed" name="{{$project->id}}" value="{{$bug->id}}"></td>
+        
+        </form>
+
+       
       @endif
       
     </tr>
@@ -100,9 +118,15 @@
 
 
 
-@if($feature->completed)<td class="text-success">Completed</td>@elseif(!$feature->completed)<td class="text-danger">NOT COMPLETED</td>
-<td><label for="">Mark As Complete</label>
-<input type="checkbox" name="" id=""></td>
+@if($feature->completed)
+<td class="text-success">Completed</td>
+
+@elseif(!$feature->completed)
+<td class="text-danger">NOT COMPLETED</td>
+<td>
+  <label for="">Mark As Complete</label>
+<input type="checkbox" class="toggle-feature-completed" name="{{$project->id}}" value="{{$feature->id}}" >
+</td>
 @endif
 
 </tr>
