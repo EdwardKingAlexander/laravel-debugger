@@ -21,10 +21,10 @@
  <textarea name="feature_name" id="" cols="45" rows="2">{{$feature->feature_name}}</textarea> <br>
 
  <label for="feature_description">Description</label> <br>
- <textarea name="feature_description" id="" cols="90" rows="10">{{$feature->feature_name}}</textarea> <br>
+ <textarea name="feature_description" id="" cols="90" rows="10">{{$feature->feature_description}}</textarea> <br>
 
  <label for="due_date"></label><br>
- <input type="datetime-local" name="due_date" id="" value=""> <br>
+ <input type="datetime-local" name="due_date" id="" value="{{$feature->due_date}}"> <br>
 
  <input type="submit" value="Save Feature" class="btn btn-primary mt-3">
 

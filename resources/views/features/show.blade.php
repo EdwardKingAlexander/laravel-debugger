@@ -15,7 +15,7 @@
     <hr>
     <h4>{{$feature->feature_description}}</h4>
     <h4>Due: {{Carbon\Carbon::parse($feature->due_date)->format('m/d/Y')}}</h4>
-    @if($feature->is_complete == 1) 
+    @if($feature->completed == 1) 
     <h4 class="text-success">Feature is completed</h4>
     @else
     <h4 class="text-danger">Feature is not yet completed</h4>

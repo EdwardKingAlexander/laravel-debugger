@@ -13,9 +13,12 @@ checked.forEach(function(check)
         let projectId = e.target.name;
             
         update('bugs', projectId, bugId);
-        location.reload();
+        setTimeout(() => {
+            location.reload()
+        }, 1500);
     })
 });
+
 
 features.forEach(function(feature)
 {
@@ -24,7 +27,9 @@ features.forEach(function(feature)
         let projectId = e.target.name;
 
     update('features', projectId, featureId);
-    location.reload();
+    setTimeout(() => {
+        location.reload()
+    }, 1500);
     });
 })
 
@@ -40,7 +45,7 @@ const update = (type, projectId, bugId) =>
     });
    
     $.ajax({
-        url: `/projects/${projectId}/${type}/${bugId}`,
+        url: `/api/projects/${projectId}/${type}/${bugId}`,
         method: 'PUT',
         dataType: 'json',
         data: {

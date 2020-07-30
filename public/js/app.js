@@ -49887,7 +49887,9 @@ checked.forEach(function (check) {
     var bugId = e.target.value;
     var projectId = e.target.name;
     update('bugs', projectId, bugId);
-    location.reload();
+    setTimeout(function () {
+      location.reload();
+    }, 1500);
   });
 });
 features.forEach(function (feature) {
@@ -49895,7 +49897,9 @@ features.forEach(function (feature) {
     var featureId = e.target.value;
     var projectId = e.target.name;
     update('features', projectId, featureId);
-    location.reload();
+    setTimeout(function () {
+      location.reload();
+    }, 1500);
   });
 }); /// methods 
 
@@ -49906,7 +49910,7 @@ var update = function update(type, projectId, bugId) {
     }
   });
   $.ajax({
-    url: "/projects/".concat(projectId, "/").concat(type, "/").concat(bugId),
+    url: "/api/projects/".concat(projectId, "/").concat(type, "/").concat(bugId),
     method: 'PUT',
     dataType: 'json',
     data: {
